@@ -10,7 +10,7 @@ public interface IGenericOwnedRepository<TEntity, TDto>
 {
     Task<TDto> GetMineById(ClaimsPrincipal user, string id);
     Task<List<TDto>> GetAllMine(ClaimsPrincipal user);
-    Task<string> AddMine(ClaimsIdentity user, TDto dto);
-    Task<TDto> UpdateMine(ClaimsIdentity user, TDto dto);
-    Task<bool> DeleteMine(ClaimsIdentity user, string id);
+    Task<string> AddMine(ClaimsPrincipal user, TDto dto);
+    Task<TDto> UpdateMine(ClaimsPrincipal user, TDto dto);
+    Task<bool> DeleteMine(ClaimsPrincipal user, string id);
 }
