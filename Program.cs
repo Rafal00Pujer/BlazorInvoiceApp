@@ -2,12 +2,10 @@ using AutoMapper;
 using BlazorInvoiceApp.Areas.Identity;
 using BlazorInvoiceApp.Data;
 using BlazorInvoiceApp.Repository;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
+using Radzen;
 
 namespace BlazorInvoiceApp
 {
@@ -27,6 +25,7 @@ namespace BlazorInvoiceApp
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
             builder.Services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
+            builder.Services.AddScoped<DialogService>();
 
             builder.Services.AddTransient<IRepositoryCollection, RepositoryCollection>();
 
