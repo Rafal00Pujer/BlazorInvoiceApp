@@ -23,7 +23,7 @@ public class GenericOwnedRepository<TEntity, TDto> : IGenericOwnedRepository<TEn
 
     public virtual async Task<string> AddMine(ClaimsPrincipal user, TDto dto)
     {
-        var userId = GetMysUserId(user);
+        var userId = GetMyUserId(user);
 
         if (userId is not null)
         {
@@ -42,7 +42,7 @@ public class GenericOwnedRepository<TEntity, TDto> : IGenericOwnedRepository<TEn
 
     public virtual async Task<bool> DeleteMine(ClaimsPrincipal user, string id)
     {
-        var userId = GetMysUserId(user);
+        var userId = GetMyUserId(user);
 
         if (userId is not null)
         {
@@ -64,7 +64,7 @@ public class GenericOwnedRepository<TEntity, TDto> : IGenericOwnedRepository<TEn
 
     public virtual async Task<List<TDto>> GetAllMine(ClaimsPrincipal user)
     {
-        var userId = GetMysUserId(user);
+        var userId = GetMyUserId(user);
 
         if (userId is not null)
         {
@@ -82,7 +82,7 @@ public class GenericOwnedRepository<TEntity, TDto> : IGenericOwnedRepository<TEn
 
     public virtual async Task<TDto> GetMineById(ClaimsPrincipal user, string id)
     {
-        var userId = GetMysUserId(user);
+        var userId = GetMyUserId(user);
 
         if (userId is not null)
         {
@@ -101,7 +101,7 @@ public class GenericOwnedRepository<TEntity, TDto> : IGenericOwnedRepository<TEn
 
     public virtual async Task<TDto> UpdateMine(ClaimsPrincipal user, TDto dto)
     {
-        var userId = GetMysUserId(user);
+        var userId = GetMyUserId(user);
 
         if (userId is not null)
         {
@@ -124,7 +124,7 @@ public class GenericOwnedRepository<TEntity, TDto> : IGenericOwnedRepository<TEn
         return null!;
     }
 
-    protected string? GetMysUserId(ClaimsPrincipal user)
+    protected string? GetMyUserId(ClaimsPrincipal user)
     {
         var uid = user.FindFirst(ClaimTypes.NameIdentifier);
 
@@ -138,7 +138,7 @@ public class GenericOwnedRepository<TEntity, TDto> : IGenericOwnedRepository<TEn
 
     protected async Task<List<TDto>> GenericQuery(ClaimsPrincipal user, Expression<Func<TEntity, bool>>? expression, List<Expression<Func<TEntity, bool>>>? includes)
     {
-        var userId = GetMysUserId(user);
+        var userId = GetMyUserId(user);
 
         if (userId is not null)
         {

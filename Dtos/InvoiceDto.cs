@@ -25,4 +25,6 @@ public class InvoiceDto : IDto, IOwnedDto
     public double Credit { get; set; } = 0;
 
     public double TaxRate { get; set; } = 0;
+
+    public double InvoiceTotal { get; set; } = 0;
 }

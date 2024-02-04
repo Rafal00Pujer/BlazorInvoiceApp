@@ -1,0 +1,34 @@
+﻿@inject IRepositoryCollection repo
+@inject AuthenticationStateProvider authState
+
+<h3>CustomerSetupComponent</h3>
+
+<RadzenDataGrid AllowAlternatingRows="false" AllowSorting="true" EditMode="DataGridEditMode.Single"
+                Data="@customers" TItem="CustomerDto">
+    <Columns>
+        <RadzenDataGridColumn TItem="CustomerDto" Property="Id" Title="Id" Width="200px">
+        </RadzenDataGridColumn>
+
+        <RadzenDataGridColumn TItem="CustomerDto" Property="Name" Title="Name" Width="200px">
+        </RadzenDataGridColumn>
+    </Columns>
+</RadzenDataGrid>
+
+@code {
+    List<CustomerDto> customers = new();
+    RadzenDataGrid<CustomerDto>? customersGrid;
+
+    string Message = string.Empty;
+    CustomerDto? customerToInsert;
+    CustomerDto? customerToUpdate;
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState auth = await authState.GetAuthenticationStateAsync();
+
+        await repo.Customer.Seed(auth.User);
+        await repo.Save();
+
+        customers = await repo.Customer.GetAllMine(auth.User);
+    }
+}

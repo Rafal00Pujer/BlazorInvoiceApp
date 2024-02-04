@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BlazorInvoiceApp.Data;
 using BlazorInvoiceApp.Dtos;
+using System.Security.Claims;
 
 namespace BlazorInvoiceApp.Repository
 {
@@ -9,6 +10,11 @@ namespace BlazorInvoiceApp.Repository
         public InvoiceLineItemRepository(ApplicationDbContext context, IMapper mapper) : base(context, mapper)
         {
 
+        }
+
+        public async Task<List<InvoiceLineItemDto>> GetAllByInvoiceId(ClaimsPrincipal user, string invoiceId)
+        {
+            return await GenericQuery(user, l => l.InvoiceId == invoiceId, null);
         }
     }
 }

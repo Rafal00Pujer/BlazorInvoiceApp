@@ -33,5 +33,5 @@ public class Invoice : IEntity, IOwnedEntity
 
     public double TaxRate { get; set; } = 0;
 
-    public ICollection<InvoiceLineItem> LineItems { get; set; } = new List<InvoiceLineItem>();
+    public ICollection<InvoiceLineItem> InvoiceLineItems { get; set; } = new List<InvoiceLineItem>();
 }
